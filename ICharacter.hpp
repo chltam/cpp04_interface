@@ -1,6 +1,10 @@
 #ifndef _ICHARACTER_H_
 #define _ICHARACTER_H_
 
+#include "interface.hpp"
+// #include "AMateria.hpp"
+
+class AMateria;
 
 class ICharacter{
 
