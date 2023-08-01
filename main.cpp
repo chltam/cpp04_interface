@@ -16,8 +16,14 @@ int main()
 
   cosmo.equip(two);
   cosmo.equip(three);
-  cosmo.use(0, cosmo);
-  cosmo.use(1, cosmo);
+  Character jack;
+  jack = cosmo;
+  cosmo.unequip(0);
+  cosmo.unequip(1);
+  jack.use(0, jack);
+  jack.use(1, jack);
+  // cosmo.use(0, cosmo);
+  // cosmo.use(1, cosmo);
   // PRINT(cosmo.inv[0]->getType());
   // PRINT(cosmo.inv[1]->getType());
   // delete two;

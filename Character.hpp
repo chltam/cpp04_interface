@@ -11,7 +11,7 @@ class Character : public ICharacter{
     Character();
     Character(const std::string name);
     Character(const Character& ref);
-    virtual ~Character() {}
+    virtual ~Character();
     Character&  operator=(const Character& ref);
     virtual std::string const & getName() const;
     virtual void equip(AMateria* m);
@@ -21,6 +21,17 @@ class Character : public ICharacter{
   private:
     std::string name_;
     AMateria*  inv_[4];
+    
+    struct Floor{
+      AMateria* trash;
+      Floor*  next;
+    };
+
+    Floor* floor_;
+
+  private:
+    void  dropMateria(AMateria* trash);
+    void  cleanFloor();
 };
 
 #endif
