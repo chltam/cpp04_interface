@@ -26,8 +26,6 @@ int main()
   // cosmo.use(1, cosmo);
   // PRINT(cosmo.inv[0]->getType());
   // PRINT(cosmo.inv[1]->getType());
-  // delete two;
-  // delete three;
 
   return (0);
 }

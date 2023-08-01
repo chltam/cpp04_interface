@@ -22,6 +22,11 @@ Character::Character(const Character& ref)
 
 Character::~Character()
 {
+  for (int i = 0; i < 4; i++)
+  {
+    if (inv_[i] != NULL)
+      delete inv_[i];
+  }
   cleanFloor();
 }
 
@@ -94,7 +99,12 @@ void  Character::cleanFloor()
 {
   if (floor_ == NULL)
     return ;
-  Floor* temp;
-  temp = floor_;
+  while (floor_)
+  {
+    Floor* temp = floor_;
+    floor_ = floor_->next;
+    delete temp->trash;
+    delete temp;
+  }
   
 }

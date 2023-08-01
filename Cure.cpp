@@ -4,7 +4,7 @@ Cure::Cure() : AMateria("cure"){
   PRINT_LOG("Cure default constructor called");
 }
 
-Cure::Cure(const Cure& ref){
+Cure::Cure(const Cure& ref) : AMateria() {
   type_ = ref.type_;
   PRINT_LOG("Cure COPY constructor called");
 }

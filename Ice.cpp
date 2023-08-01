@@ -4,7 +4,7 @@ Ice::Ice() : AMateria("ice"){
   PRINT_LOG("Ice default constructor called");
 }
 
-Ice::Ice(const Ice& ref){
+Ice::Ice(const Ice& ref) : AMateria(){
   type_ = ref.type_;
   PRINT_LOG("Ice COPY constructor called");
 }
