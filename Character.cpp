@@ -34,6 +34,10 @@ Character&  Character::operator=(const Character& ref)
 {
   this->name_ = ref.name_;
   for (int i = 0; i < 4; i++){
+    if (this->inv_[i] != NULL) {
+      delete this->inv_[i];
+      this->inv_[i] = NULL;
+    }
     if (ref.inv_[i] != NULL)
       this->inv_[i] = ref.inv_[i]->clone();
     else
