@@ -22,18 +22,40 @@ int main()
   delete me;
   delete src;
 
-  // PRINT("-----extra test 1-----");
-  // // Character cosmo("Cosmo");
-  // Character* cosmo = new Character("cosmo");
-  // Character cosmomo = *cosmo;
-  // IMateriaSource* src2 = new MateriaSource();
-  // src2->learnMateria(new Ice());
-  // AMateria* ice = src2->createMateria("ice");
-  // // Cure cure;
+  PRINT("-----extra test 1-----");
+  Character cosmo("cosmo");
+  Character jack("jack");
+  Ice* ice = new Ice();
+  Cure* cure = new Cure();
 
-  // cosmomo.equip(ice);
-  // cosmomo.use(0, *cosmo);
-  // delete cosmo;
-  // delete src2;
+  cosmo.equip(ice);
+  cosmo.equip(cure);
+
+  Character cosmomo(cosmo);
+  cosmomo.equip(new Ice);
+  cosmomo = cosmo;
+  cosmo.unequip(0);
+  cosmo.unequip(1);
+  
+  cosmomo.use(0, jack);
+  cosmomo.use(1, jack);
+
+
+  PRINT("-----extra test 2-----");
+  Character nick("nick");
+  MateriaSource* src2 = new MateriaSource;
+  src2->learnMateria(new Ice);
+  src2->learnMateria(new Cure);
+  
+  MateriaSource dllm = *src2;
+  delete src2;
+
+  nick.equip(dllm.createMateria("ice"));
+  nick.equip(dllm.createMateria("cure"));
+  nick.equip(dllm.createMateria("wtffff"));
+  nick.use(0, cosmo);
+  nick.use(1, cosmo);
+  nick.use(2, cosmo);
+  nick.unequip(3);
   return 0;
 }

@@ -16,7 +16,14 @@ Character::Character(const std::string name) : name_(name){
 
 Character::Character(const Character& ref)
 {
-  *this = ref;
+  this->name_ = ref.name_;
+  for (int i = 0; i < 4; i++) {
+    if (ref.inv_[i] != NULL)
+      this->inv_[i] = ref.inv_[i]->clone();
+    else
+      this->inv_[i] = NULL;
+  }
+  this->floor_ = NULL;
   PRINT_LOG("Character COPY constructor called");
 }
 
@@ -33,11 +40,13 @@ Character::~Character()
 Character&  Character::operator=(const Character& ref)
 {
   this->name_ = ref.name_;
-  for (int i = 0; i < 4; i++){
+  for (int i = 0; i < 4; i++) {
     if (this->inv_[i] != NULL) {
       delete this->inv_[i];
       this->inv_[i] = NULL;
     }
+  }
+  for (int i = 0; i < 4; i++) {
     if (ref.inv_[i] != NULL)
       this->inv_[i] = ref.inv_[i]->clone();
     else
@@ -53,6 +62,10 @@ std::string const&  Character::getName() const{
 
 void  Character::equip(AMateria* m)
 {
+  if (!m) {
+    PRINT_WARNING("nothing to equip");
+    return ;
+  }
   for (int i = 0; i < 4; i++){
     if (inv_[i] == NULL)
     {
@@ -65,7 +78,11 @@ void  Character::equip(AMateria* m)
 void  Character::unequip(int idx)
 {
   if (idx < 0 || idx > 3){
-    PRINT_ERROR("index index number");
+    PRINT_ERROR("invalid index number");
+    return ;
+  }
+  if (!inv_[idx]) {
+    PRINT_WARNING("nothing to unequip");
     return ;
   }
   dropMateria(inv_[idx]);
@@ -77,7 +94,7 @@ void  Character::use(int idx, ICharacter& target)
   if (inv_[idx] == NULL)
     return ;
   if (idx < 0 || idx > 3){
-    PRINT_ERROR("index index number");
+    PRINT_ERROR("invalid index number");
     return ;
   }
   inv_[idx]->use(target);

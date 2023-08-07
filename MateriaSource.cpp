@@ -9,7 +9,12 @@ MateriaSource::MateriaSource() : IMateriaSource() {
 
 MateriaSource::MateriaSource(const MateriaSource& ref)
 {
-  *this = ref;
+  for (int i = 0; i < 4; i++) {
+    if (ref.memory_[i] != NULL)
+      this->memory_[i] = ref.memory_[i]->clone();
+    else
+      this->memory_[i] = NULL;
+  }
   PRINT_LOG("MateriaSource COPY constructor called");
 }
 
